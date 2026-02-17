@@ -55,9 +55,13 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            position: sticky;
+            /* FIX: Teljes szélesség és rögzítés */
+            position: fixed; 
             top: 0;
-            z-index: 1000;
+            left: 0;
+            width: 100%; /* Ez biztosítja, hogy ne csússzon balra */
+            box-sizing: border-box; /* Ez garantálja, hogy a padding ne nyomja ki a széleket */
+            z-index: 10000;
             border-bottom: 1px solid var(--border);
             transition: var(--transition);
         }
@@ -112,6 +116,7 @@
             height: 80vh; 
             overflow: hidden;
             padding: 0 8%;
+            margin-top: 70px; /* Az asztali fejléc magassága */
         }
 
         .slide-container {
@@ -361,10 +366,11 @@
 
         @media (max-width: 768px) {
             header {
-                flex-direction: column;
-                padding: 15px 5%;
-                gap: 15px;
-                text-align: center;
+                padding: 10px 5%;
+                width: 100%;
+            }
+            .slider-wrapper {
+                margin-top: 110px; /* Mobilon a több soros menü miatt nagyobb hely kell */
             }
             nav ul {
                 gap: 15px;
