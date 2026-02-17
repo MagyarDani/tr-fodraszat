@@ -363,66 +363,78 @@
             .about-image { min-height: 300px; background-size: contain; }
             .slider-wrapper { padding: 0 5%; }
         }
+        
 
-        @media (max-width: 768px) {
+        @media (max-width: 900px) and (orientation: landscape) {
             header {
-                flex-direction: row; /* Visszaállítjuk egy sorba a logót és a menüt */
-                padding: 10px 4%;
-                justify-content: space-between;
-
-                background: var(--glass); /* Áttetsző háttér */
-                backdrop-filter: blur(15px); /* Elmosódás */
-                -webkit-backdrop-filter: blur(15px);
-                border-bottom: 1px solid var(--border);
-            }
-
-            .slider-wrapper {
-                margin-top: 110px; /* Mobilon a több soros menü miatt nagyobb hely kell */
+                flex-direction: row !important;
             }
             nav {
-                width: auto;
+                display: block !important;
             }
-            nav ul {
-                gap: 8px; /* Minimális távolság */
-                flex-wrap: nowrap; /* Tilos az egymás alá csúszás */
-                overflow-x: auto; /* Ha nem fér el, vízszintesen görgethető */
-                -webkit-overflow-scrolling: touch;
-                padding-bottom: 5px;
+            body {
+                padding-top: 60px !important;
+            }
+        }
+
+        /* --- VÉGLEGES MOBIL OPTIMALIZÁLÁS --- */
+        @media (max-width: 768px) {
+            header {
+                position: fixed;
+                width: 100%;
+                top: 0;
+                left: 0;
+                padding: 10px 15px !important;
+                flex-direction: row !important; /* Kényszerített egysoros elrendezés */
+                flex-wrap: nowrap !important;
+                justify-content: space-between !important;
+                height: auto;
+                min-height: 60px;
+                background: var(--bg);
+                z-index: 10000;
             }
 
-            nav ul li a {
-                font-size: 10px; /* Kisebb betűméret a zsúfoltság ellen */
-                letter-spacing: 0.5px;
-                white-space: nowrap; /* Ne törje ketté a szavakat */
+            .logo {
+                font-size: 14px !important;
+                margin: 0 !important;
+                white-space: nowrap;
             }
 
-            .logo { font-size: 14px; /* Kisebb logó mobilon */ }
-            
-            /* A módváltót és a gombot érdemes külön kezelni a helytakarékosság miatt */
+            /* Elrejtjük a szöveges menüt mobilon, hogy ne csússzon rá a tartalomra */
+            nav {
+                display: none; 
+            }
+
+            /* A módváltó és a bejelentkezés gomb maradjon csak látható a helytakarékosság miatt */
             .theme-controller {
-                padding: 3px 8px;
+                margin: 0 5px !important;
+                padding: 5px 10px !important;
+            }
+
+            .theme-controller span:last-child {
+                display: none; /* A "MODE" felirat eltűnik, csak az ikon marad */
             }
 
             .btn-main {
-                font-size: 9px !important;
-                padding: 6px 10px !important;
+                padding: 8px 12px !important;
+                font-size: 10px !important;
+                white-space: nowrap;
             }
 
-            .slider-wrapper { height: 70vh; }
-            .hero-slide h1 { font-size: 50px !important; }
-            
-            .features-grid { flex-direction: column; }
-            
-            /* Galéria rács javítása tabletre/nagy mobilra */
-            .modern-grid {
-                grid-template-columns: repeat(2, 1fr);
-                grid-template-rows: auto;
-                grid-auto-rows: 250px;
+            /* FIX: Megfelelő távolság a header alatt, hogy a szöveg ne tűnjön el */
+            body {
+                padding-top: 70px !important;
             }
-            .item-1 { grid-column: span 2; grid-row: span 1; }
-            .item-2, .item-3, .item-4, .item-5, .load-more-tile { grid-column: span 1; grid-row: span 1; }
 
-            .special-offer-bar { flex-direction: column; text-align: center; gap: 20px; }
+            .slider-wrapper {
+                margin-top: 0 !important;
+                height: 70vh !important; /* Álló helyzetben ne legyen túl magas a slider */
+            }
+            
+            /* Hero szöveg igazítása, hogy ne lógjon ki */
+            .hero-slide h1 {
+                font-size: 42px !important;
+            }
         }
 
         @media (max-width: 480px) {
