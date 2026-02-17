@@ -379,63 +379,72 @@
 
         /* --- VÉGLEGES MOBIL OPTIMALIZÁLÁS --- */
         @media (max-width: 768px) {
-            header {
-                position: fixed;
-                width: 100%;
-                top: 0;
-                left: 0;
-                padding: 10px 15px !important;
-                flex-direction: row !important; /* Kényszerített egysoros elrendezés */
-                flex-wrap: nowrap !important;
-                justify-content: space-between !important;
-                height: auto;
-                min-height: 60px;
-                background: var(--bg);
-                z-index: 10000;
-            }
-
-            .logo {
-                font-size: 14px !important;
-                margin: 0 !important;
-                white-space: nowrap;
-            }
-
-            /* Elrejtjük a szöveges menüt mobilon, hogy ne csússzon rá a tartalomra */
-            nav {
-                display: none; 
-            }
-
-            /* A módváltó és a bejelentkezés gomb maradjon csak látható a helytakarékosság miatt */
-            .theme-controller {
-                margin: 0 5px !important;
-                padding: 5px 10px !important;
-            }
-
-            .theme-controller span:last-child {
-                display: none; /* A "MODE" felirat eltűnik, csak az ikon marad */
-            }
-
-            .btn-main {
-                padding: 8px 12px !important;
-                font-size: 10px !important;
-                white-space: nowrap;
-            }
-
-            /* FIX: Megfelelő távolság a header alatt, hogy a szöveg ne tűnjön el */
-            body {
-                padding-top: 70px !important;
-            }
-
-            .slider-wrapper {
-                margin-top: 0 !important;
-                height: 70vh !important; /* Álló helyzetben ne legyen túl magas a slider */
-            }
-            
-            /* Hero szöveg igazítása, hogy ne lógjon ki */
-            .hero-slide h1 {
-                font-size: 42px !important;
-            }
+        /* 1. Kiszabadítjuk a slidert a fix magasságból */
+        .slider-wrapper {
+            height: auto !important;
+            overflow: visible !important;
+            padding: 0 !important;
         }
+
+        /* 2. Az összes slide-ot egymás alá kényszerítjük */
+        .slide-container {
+            display: flex;
+            flex-direction: column !important;
+            width: 100% !important;
+            transform: none !important; /* Letiltjuk a JS általi elcsúsztatást */
+        }
+
+        .slide {
+            width: 100% !important;
+            height: auto !important;
+            min-height: auto !important;
+            padding: 40px 20px !important;
+        }
+
+        /* 3. Hero szekció (Pure Precision) magassága maradjon fix */
+        .hero-slide {
+            height: 80vh !important;
+        }
+
+        /* 4. Bemutatkozás (About) blokk javítása */
+        .about-slide {
+            flex-direction: column !important;
+            padding: 20px !important;
+            gap: 20px !important;
+            border: none !important;
+        }
+
+        .about-image {
+            height: 350px !important; /* A kép ne tűnjön el */
+            width: 100% !important;
+            background-size: cover !important;
+        }
+
+        /* 5. Értékek (Features) kártyák igazítása */
+        .features-slide {
+            padding: 40px 20px !important;
+        }
+        
+        .features-grid {
+            flex-direction: column !important;
+            gap: 15px !important;
+        }
+
+        /* 6. Elrejtjük a nyilakat mobilon, mert már nem csúszik az oldal */
+        .slider-nav {
+            display: none !important;
+        }
+
+        /* 7. Szövegek olvashatósága */
+        .about-text h2 {
+            font-size: 24px !important;
+        }
+        
+        .about-text p {
+            font-size: 14px !important;
+            line-height: 1.6 !important;
+        }
+    }
 
         @media (max-width: 480px) {
             #services, #gallery, #location { padding: 60px 5%; }
