@@ -408,16 +408,14 @@
 
         /* 4. Bemutatkozás (About) blokk javítása */
         .about-slide {
-            flex-direction: column !important;
-            padding: 20px !important;
-            gap: 20px !important;
-            border: none !important;
+            display: flex;
+            flex-direction: column; /* Mobilon egymás alá kerül a kép és a szöveg */
+            padding: 20px;
         }
 
         .about-image {
-            height: 350px !important; /* A kép ne tűnjön el */
-            width: 100% !important;
-            background-size: cover !important;
+            width: 100%;
+            height: 300px !important; /* Mobilon fix magasság a jobb láthatóságért */
         }
 
         /* 5. Értékek (Features) kártyák igazítása */
@@ -443,6 +441,10 @@
         .about-text p {
             font-size: 14px !important;
             line-height: 1.6 !important;
+        }
+
+        body {
+            padding-top: 70px !important;
         }
     }
 
@@ -472,6 +474,41 @@
 
             .map-wrapper { height: 350px; }
         }
+
+        @media (max-height: 500px) and (orientation: landscape) {
+        header {
+            height: 50px !important; /* Sokkal vékonyabb fejléc fekvő módban */
+            padding: 0 15px !important;
+        }
+
+        nav {
+            display: block !important;
+            max-width: 60%; /* Helyet hagyunk a logónak és a gombnak */
+        }
+
+        nav ul {
+            display: flex !important;
+            flex-wrap: nowrap !important;
+            overflow-x: auto !important; /* VÍZSZINTES GÖRGETÉS BEKAPCSOLÁSA */
+            gap: 15px !important;
+            padding: 5px 0;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        nav ul li a {
+            font-size: 11px !important;
+            white-space: nowrap; /* Ne törje meg a szavakat */
+        }
+
+        .logo {
+            font-size: 12px !important;
+        }
+
+        .btn-main {
+            display: none; /* Fekvő módban a legfontosabb gombot elrejthetjük a hely miatt, vagy kicsinyíthetjük */
+        }
+    }
+
 
         @media (max-width: 480px) and (orientation: portrait) {
             header {
