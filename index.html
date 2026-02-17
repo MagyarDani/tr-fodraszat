@@ -74,8 +74,8 @@
         nav ul li a { 
             color: var(--text); 
             text-decoration: none; 
-            font-size: 11px; 
-            font-weight: 600; 
+            font-size: 12px; 
+            font-weight: 700; 
             text-transform: uppercase; 
             letter-spacing: 1px; 
             opacity: 0.7;
@@ -366,19 +366,48 @@
 
         @media (max-width: 768px) {
             header {
-                padding: 10px 5%;
-                width: 100%;
+                flex-direction: row; /* Visszaállítjuk egy sorba a logót és a menüt */
+                padding: 10px 4%;
+                justify-content: space-between;
+
+                background: var(--glass); /* Áttetsző háttér */
+                backdrop-filter: blur(15px); /* Elmosódás */
+                -webkit-backdrop-filter: blur(15px);
+                border-bottom: 1px solid var(--border);
             }
+            
             .slider-wrapper {
                 margin-top: 110px; /* Mobilon a több soros menü miatt nagyobb hely kell */
             }
-            nav ul {
-                gap: 15px;
-                flex-wrap: wrap;
-                justify-content: center;
+            nav {
+                width: auto;
             }
-            .logo { font-size: 18px; }
+            nav ul {
+                gap: 8px; /* Minimális távolság */
+                flex-wrap: nowrap; /* Tilos az egymás alá csúszás */
+                overflow-x: auto; /* Ha nem fér el, vízszintesen görgethető */
+                -webkit-overflow-scrolling: touch;
+                padding-bottom: 5px;
+            }
+
+            nav ul li a {
+                font-size: 10px; /* Kisebb betűméret a zsúfoltság ellen */
+                letter-spacing: 0.5px;
+                white-space: nowrap; /* Ne törje ketté a szavakat */
+            }
+
+            .logo { font-size: 14px; /* Kisebb logó mobilon */ }
             
+            /* A módváltót és a gombot érdemes külön kezelni a helytakarékosság miatt */
+            .theme-controller {
+                padding: 3px 8px;
+            }
+
+            .btn-main {
+                font-size: 9px !important;
+                padding: 6px 10px !important;
+            }
+
             .slider-wrapper { height: 70vh; }
             .hero-slide h1 { font-size: 50px !important; }
             
