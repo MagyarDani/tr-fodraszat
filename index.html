@@ -375,7 +375,7 @@
                 -webkit-backdrop-filter: blur(15px);
                 border-bottom: 1px solid var(--border);
             }
-            
+
             .slider-wrapper {
                 margin-top: 110px; /* Mobilon a több soros menü miatt nagyobb hely kell */
             }
@@ -451,6 +451,51 @@
 
             .map-wrapper { height: 350px; }
         }
+
+        @media (max-width: 480px) and (orientation: portrait) {
+            header {
+                padding: 10px 15px; /* Kisebb oldalsó padding */
+                flex-wrap: wrap; /* Engedjük, hogy a tartalom új sorba is kerülhessen, ha nagyon muszáj */
+            }
+
+            .logo {
+                font-size: 16px; /* Kisebb logó álló helyzetben */
+                letter-spacing: 1px;
+            }
+
+            nav {
+                width: 100%; /* A menüsor kapjon saját sort a logó alatt */
+                margin-top: 5px;
+                order: 3; /* A gomb után kerüljön */
+            }
+
+            nav ul {
+                display: flex;
+                justify-content: space-between; /* Egyenletesen ossza el a menüpontokat */
+                gap: 5px;
+                overflow-x: auto; /* Ha még így is sok, vízszintesen görgethető lesz */
+                padding-bottom: 5px;
+                -webkit-overflow-scrolling: touch;
+            }
+
+            nav ul li a {
+                font-size: 9px; /* Kisebb betűk, hogy beférjenek */
+                white-space: nowrap;
+            }
+
+            /* A módváltó és a Bejelentkezés gomb maradjon egy sorban a logóval */
+            .theme-controller {
+                padding: 4px 8px;
+                order: 1;
+            }
+
+            .btn-main {
+                padding: 6px 10px !important;
+                font-size: 9px !important;
+                order: 2;
+            }
+        }
+
     </style>
 </head>
 <body>
