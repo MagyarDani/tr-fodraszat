@@ -1,0 +1,888 @@
+<!DOCTYPE html>
+<html lang="hu" data-bs-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+    <title>TR Fodrászat Debrecen</title>
+    <link rel="icon" type="image/png" href="kepek/logo.png">
+    <link rel="apple-touch-icon" href="kepek/logo.png">
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;900&display=swap" rel="stylesheet">
+
+    <style>
+        * {
+            font-family: 'Inter', sans-serif;
+        }
+
+        body {
+            background-color: var(--bs-body-bg);
+            color: var(--bs-body-color);
+            transition: background 0.3s ease;
+        }
+
+        /* Navigációs belógás (peek effect) beállítása */
+        section {
+            scroll-margin-top: 80px; /* Navbar magassága */
+            padding-bottom: 10vh !important; /* Hogy az alatta lévő szekció belelógjon a képbe */
+        }
+
+        /* Fix header (Bootstrap navbar override) */
+        .navbar {
+            transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+            backdrop-filter: blur(0px);
+            border-bottom: 1px solid rgba(var(--bs-secondary-rgb), 0.2);
+            z-index: 1050;
+        }
+
+        .navbar.scrolled {
+            backdrop-filter: blur(12px);
+            background-color: rgba(var(--bs-dark-bg-subtle), 0.85) !important;
+            padding-top: 0.5rem !important;
+            padding-bottom: 0.5rem !important;
+            border-bottom-color: rgba(var(--bs-secondary-rgb), 0.3);
+        }
+
+        [data-bs-theme="dark"] .navbar.scrolled {
+            background-color: rgba(0, 0, 0, 0.85) !important;
+        }
+
+        .logo-text {
+            font-size: 1.4rem;
+            font-weight: 900;
+            letter-spacing: 3px;
+        }
+
+        /* Hero carousel - fullscreen feeling */
+        .hero-carousel {
+            margin-top: 76px; /* navbar height compensation */
+        }
+
+        /* Vertikális középre igazítás a carousel elemekhez */
+        .carousel-flex-center {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 85vh;
+            width: 100%;
+        }
+
+        /* --- MOBIL NÉZET: a carousel elemek egymás alatt jelennek meg (nem slide) --- */
+        @media (max-width: 767px) {
+            .hero-carousel {
+                margin-top: 65px;
+            }
+
+            .hero-carousel .carousel-inner {
+                display: flex;
+                flex-direction: column;
+            }
+
+            .hero-carousel .carousel-item {
+                position: relative;
+                display: block !important;
+                opacity: 1 !important;
+                visibility: visible !important;
+                min-height: auto;
+                margin-bottom: 2rem;
+                border-radius: 0;
+            }
+
+            .carousel-flex-center {
+                min-height: auto;
+                padding: 3rem 0;
+            }
+
+            .hero-carousel .carousel-control-prev,
+            .hero-carousel .carousel-control-next,
+            .hero-carousel .carousel-indicators {
+                display: none !important;
+            }
+
+            .hero-carousel .carousel-item.active,
+            .hero-carousel .carousel-item-next,
+            .hero-carousel .carousel-item-prev {
+                display: block !important;
+                transform: none !important;
+                position: relative !important;
+                left: 0 !important;
+            }
+
+            .hero-carousel .carousel-item {
+                transition: none !important;
+            }
+        }
+
+        /* Asztali nézetben marad a carousel slide funkció */
+        @media (min-width: 768px) {
+            .hero-carousel .carousel-item {
+                min-height: 85vh;
+                background-size: cover;
+                background-position: center;
+                position: relative;
+            }
+
+            .hero-carousel .carousel-item.active {
+                display: block;
+            }
+        }
+
+        .carousel-item.hero-slide-only::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.55);
+            z-index: 1;
+        }
+
+        .carousel-item:not(.hero-slide-only)::before {
+            display: none;
+        }
+
+        .carousel-caption-custom {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            color: white;
+        }
+
+        .carousel-item:not(.hero-slide-only) .carousel-caption-custom {
+            color: var(--bs-body-color);
+        }
+
+        .hero-slide-only .carousel-caption-custom h1 {
+            text-shadow: 0 5px 15px rgba(0,0,0,0.5);
+        }
+
+        .hero-slide-only .carousel-caption-custom {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            display: flex !important;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+        }
+
+        /* Card styles */
+        .about-card, .feature-card, .service-card, .testimonial-card {
+            background-color: var(--bs-secondary-bg);
+            border: 1px solid var(--bs-border-color);
+            transition: transform 0.3s ease, border-color 0.2s;
+            height: 100%;
+        }
+
+        .about-card:hover, .feature-card:hover, .service-card:hover, .testimonial-card:hover {
+            transform: translateY(-6px);
+            border-color: var(--bs-body-color);
+        }
+
+        .feature-icon {
+            font-size: 2.2rem;
+            display: inline-block;
+            margin-bottom: 1rem;
+        }
+
+        .stars-gold {
+            color: #ffc107;
+            margin-bottom: 0.5rem;
+        }
+
+        /* FAQ Customization */
+        .accordion-button:not(.collapsed) {
+            background-color: var(--bs-secondary-bg);
+            color: var(--bs-body-color);
+        }
+
+        /* Gallery grid */
+        .gallery-img-wrapper {
+            overflow: hidden;
+            border-radius: 4px;
+            position: relative;
+            cursor: pointer;
+        }
+
+        .gallery-img-wrapper img {
+            width: 100%;
+            height: 280px;
+            object-fit: cover;
+            filter: grayscale(100%);
+            transition: all 0.5s ease;
+        }
+
+        .gallery-img-wrapper:hover img {
+            filter: grayscale(0%);
+            transform: scale(1.02);
+        }
+
+        .img-overlay-badge {
+            position: absolute;
+            bottom: 15px;
+            left: 15px;
+            background: rgba(0,0,0,0.6);
+            backdrop-filter: blur(6px);
+            padding: 5px 12px;
+            font-size: 0.7rem;
+            letter-spacing: 1px;
+            color: white;
+            opacity: 0;
+            transition: 0.3s;
+            border-radius: 20px;
+        }
+
+        .gallery-img-wrapper:hover .img-overlay-badge {
+            opacity: 1;
+        }
+
+        .load-more-tile {
+            background-color: var(--bs-secondary-bg);
+            border: 1px dashed var(--bs-body-color);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.2s;
+            min-height: 280px;
+        }
+
+        .load-more-tile:hover {
+            background-color: var(--bs-body-color);
+            color: var(--bs-body-bg);
+            transform: scale(1.01);
+        }
+
+        /* Map iframe */
+        .map-iframe {
+            width: 100%;
+            height: 450px;
+            border: 1px solid var(--bs-border-color);
+            border-radius: 8px;
+        }
+
+        /* Fixált hívás gomb mobilon */
+        .fixed-call-btn {
+            position: fixed;
+            bottom: 25px;
+            right: 25px;
+            width: 60px;
+            height: 60px;
+            background-color: var(--bs-body-color);
+            color: var(--bs-body-bg);
+            border-radius: 50%;
+            display: none; /* Alapból rejtve, csak mobilon látszik */
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+            z-index: 1000;
+            text-decoration: none;
+            transition: transform 0.2s;
+        }
+
+        @media (max-width: 767px) {
+            .fixed-call-btn {
+                display: flex;
+            }
+        }
+
+        .modal-content {
+            border-radius: 8px;
+            background: var(--bs-body-bg);
+        }
+
+        .modal-header-img {
+            background: #f2f2f2;
+            text-align: center;
+            padding: 1.5rem;
+        }
+        [data-bs-theme="dark"] .modal-header-img {
+            background: #1e1e1e;
+        }
+        .modal-header-img img {
+            max-height: 150px;
+            width: auto;
+        }
+
+        .fb-link-custom {
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            padding: 12px;
+            border: 1px solid var(--bs-border-color);
+            transition: 0.2s;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+        }
+
+        .fb-link-custom:hover {
+            background-color: var(--bs-body-color);
+            color: var(--bs-body-bg);
+            border-color: var(--bs-body-color);
+        }
+
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.7s ease-out, transform 0.7s ease-out;
+        }
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .section-divider-custom {
+            width: 60px;
+            height: 1px;
+            background: currentColor;
+            margin: 1rem auto;
+            opacity: 0.5;
+        }
+
+        footer {
+            border-top: 1px solid var(--bs-border-color);
+        }
+
+        @media (max-width: 768px) {
+            .display-1 {
+                font-size: 3.5rem;
+            }
+            .gallery-img-wrapper img {
+                height: 220px;
+            }
+            .hero-carousel .carousel-item {
+                padding: 1rem 0;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .display-1 {
+                font-size: 2.8rem;
+            }
+        }
+
+        .carousel-item[style*="background-color"]::before {
+            display: none !important;
+        }
+
+        @media (max-width: 767px) {
+            .carousel-item.hero-slide-only {
+                position: relative;
+                min-height: 500px;
+                background-size: cover;
+                background-position: center;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <a href="tel:+36301234567" class="fixed-call-btn">
+        <i class="bi bi-telephone-fill"></i>
+    </a>
+
+    <nav id="mainNavbar" class="navbar navbar-expand-lg fixed-top bg-body-tertiary py-3">
+        <div class="container">
+            <a class="navbar-brand logo-text fw-black" href="#">TR FODRÁSZAT</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarMain" aria-controls="navbarMain" aria-expanded="false" aria-label="Menü">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarMain">
+                <ul class="navbar-nav ms-auto mb-2 mb-lg-0 align-items-center gap-lg-3 gap-2">
+                    <li class="nav-item"><a class="nav-link" href="#heroCarousel">Bemutatkozás</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#services-section">Szolgáltatások</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#gallery-section">Galéria</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#location-section">Helyszín</a></li>
+                    <li class="nav-item">
+                        <button class="btn btn-sm btn-outline-secondary rounded-pill px-3" id="themeToggleBtn">
+                            <i class="bi bi-brightness-high-fill me-1"></i> <span id="themeText">Világos</span>
+                        </button>
+                    </li>
+                    <li class="nav-item">
+                        <button class="btn btn-dark btn-sm rounded-pill px-4" onclick="openBookingModal()">
+                            <i class="bi bi-calendar-check me-1"></i> IDŐPONTFOGLALÁS
+                        </button>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div id="heroCarousel" class="carousel slide hero-carousel" data-bs-ride="carousel" data-bs-interval="8000">
+        <div class="carousel-inner">
+            <div class="carousel-item active hero-slide-only" style="background-image: url('kepek/fo_kep.png'); background-size: cover; background-position: center;">
+                <div class="carousel-caption-custom d-flex flex-column justify-content-center align-items-center h-100 container">
+                    <h1 class="display-1 fw-black text-uppercase text-center" style="letter-spacing: -3px;">PURE<br>PRECISION.</h1>
+                    <p class="small tracking-wide text-white-50 mt-3" style="letter-spacing: 5px;">MINIMALISTA HAJSZOBRÁSZAT</p>
+                    <div class="mt-4">
+                        <button class="btn btn-outline-light rounded-pill px-4 py-2" onclick="openBookingModal()">
+                            <i class="bi bi-chat-dots me-1"></i> FOGLALJ IDŐPONTOT MOST!
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="carousel-item" style="background-color: var(--bs-secondary-bg);">
+                <div class="carousel-flex-center container py-5 px-4">
+                    <div class="row align-items-center g-5 justify-content-center w-100">
+                        <div class="col-md-5 text-center">
+                            <img src="toth_robi_portre.png" alt="Tóth Robi" class="img-fluid" style= "max-height: 900px; object-fit: contain;">
+                        </div>
+                        <div class="col-md-7 text-center text-md-start">
+                            <span class="text-uppercase small text-secondary tracking-wide">RÓLAM</span>
+                            <h2 class="display-6 fw-bold mt-2">Tóth Robi vagyok a TR Fodrászat hajszobrásza!</h2>
+                            <p class="lead fs-6 mt-3 opacity-75">Fodrászként nemcsak frizurákat készítek, hanem élményt is nyújtok minden vendégemnek. Nálam a hajvágás több, mint rutin – egy kis beszélgetés, jó hangulat és figyelem minden részletre.</p>
+                            <p class="opacity-75">Szeretettel várlak egy frissen főzött, fekete kávéval! ☕✂️</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="carousel-item" style="background-color: var(--bs-secondary-bg);">
+                <div class="carousel-flex-center container py-5 text-center">
+                    <div class="w-100">
+                        <span class="text-uppercase small text-secondary">VALUES</span>
+                        <h2 class="display-6 fw-bold mt-2 mb-5">MIÉRT VÁLASSZ ENGEM?</h2>
+                        <div class="row g-4 justify-content-center">
+                            <div class="col-sm-6 col-md-4">
+                                <div class="feature-card p-4 rounded-3">
+                                    <div class="feature-icon">📏</div>
+                                    <h4 class="fw-bold">Precizitás</h4>
+                                    <p class="small opacity-75">Milliméterpontos vágások minden alkalommal.</p>
+                                </div>
+                            </div>
+                            <div class="col-sm-6 col-md-4">
+                                <div class="feature-card p-4 rounded-3">
+                                    <div class="feature-icon">🧴</div>
+                                    <h4 class="fw-bold">Prémium</h4>
+                                    <p class="small opacity-75">Csúcsminőségű hajápolók a hajad egészségéért.</p>
+                                </div>
+                            </div>
+                            <div class="col-sm-6 col-md-4">
+                                <div class="feature-card p-4 rounded-3">
+                                    <div class="feature-icon">☕</div>
+                                    <h4 class="fw-bold">Élmény</h4>
+                                    <p class="small opacity-75">Kávé és stílus egy exkluzív környezetben.</p>
+                                </div>
+                            </div>
+                            <div class="col-sm-6 col-md-4">
+                                <div class="feature-card p-4 rounded-3">
+                                    <div class="feature-icon">✂️</div>
+                                    <h4 class="fw-bold">Trend</h4>
+                                    <p class="small opacity-75">Folyamatosan követem a legújabb trendeket.</p>
+                                </div>
+                            </div>
+                            <div class="col-sm-6 col-md-4">
+                                <div class="feature-card p-4 rounded-3">
+                                    <div class="feature-icon">✨</div>
+                                    <h4 class="fw-bold">Higiénia</h4>
+                                    <p class="small opacity-75">Maximális sterilitás minden eszközünknél.</p>
+                                </div>
+                            </div>
+                            <div class="col-sm-6 col-md-4">
+                                <div class="feature-card p-4 rounded-3">
+                                    <div class="feature-icon">🤝</div>
+                                    <h4 class="fw-bold">Tanácsadás</h4>
+                                    <p class="small opacity-75">Segítek kiválasztani a karakteredhez illő formát.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#heroCarousel" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Előző</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#heroCarousel" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Következő</span>
+        </button>
+    </div>
+
+    <section id="services-section" class="py-5">
+        <div class="container py-4">
+            <div class="text-center mb-5">
+                <div class="small text-uppercase text-secondary">PRICELIST</div>
+                <h3 class="display-6 fw-light">SZOLGÁLTATÁSOK</h3>
+                <p class="text-secondary">Érvényes 2025.11.01-től.</p>
+                <div class="section-divider-custom"></div>
+            </div>
+            <div class="row g-4">
+                <div class="col-md-6 col-lg-4 reveal">
+                    <div class="service-card p-4 rounded-3">
+                        <div class="small text-uppercase text-secondary">CLASSIC CUT</div>
+                        <h4 class="fw-bold mt-2">FÉRFI HAJVÁGÁS</h4>
+                        <p class="small opacity-75 my-2">Precíziós vágás az egyéni karakteredre építve.</p>
+                        <h3 class="fw-black mt-3">3.500 Ft</h3>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4 reveal">
+                    <div class="service-card p-4 rounded-3">
+                        <div class="small text-uppercase text-secondary">JUNIOR STYLE</div>
+                        <h4 class="fw-bold mt-2">GYERMEK HAJVÁGÁS</h4>
+                        <p class="small opacity-75 my-2">Barátságos környezet a legkisebbeknek is.</p>
+                        <h3 class="fw-black mt-3">3.500 Ft</h3>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4 reveal">
+                    <div class="service-card p-4 rounded-3">
+                        <div class="small text-uppercase text-secondary">GENERATIONS</div>
+                        <h4 class="fw-bold mt-2">APA-FIA PÁROS</h4>
+                        <p class="small opacity-75 my-2">Közös stílus, közös élmény.</p>
+                        <h3 class="fw-black mt-3">5.000 Ft</h3>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4 reveal">
+                    <div class="service-card p-4 rounded-3">
+                        <div class="small text-uppercase text-secondary">BEARD ART</div>
+                        <h4 class="fw-bold mt-2">SZAKÁLLVÁGÁS</h4>
+                        <p class="small opacity-75 my-2">Pengeéles kontúrok.</p>
+                        <h3 class="fw-black mt-3">1.500 Ft</h3>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4 reveal">
+                    <div class="service-card p-4 rounded-3">
+                        <div class="small text-uppercase text-secondary">FEMME FATALE</div>
+                        <h4 class="fw-bold mt-2">NŐI PIXIE VÁGÁS</h4>
+                        <p class="small opacity-75 my-2">Bátor és elegáns rövid formák.</p>
+                        <h3 class="fw-black mt-3">4.500 Ft</h3>
+                    </div>
+                </div>
+                <div class="col-12 reveal">
+                    <div class="bg-dark text-white p-4 rounded-4 d-flex flex-wrap justify-content-between align-items-center gap-3">
+                        <div>
+                            <div class="small text-uppercase opacity-75">TR SPECIAL SERVICE</div>
+                            <h4 class="fw-bold mb-1">EGYEDI ELKÉPZELÉSED VAN?</h4>
+                            <p class="mb-0 small">Fotózásra készülsz? Megvalósítjuk!</p>
+                        </div>
+                        <a href="https://www.facebook.com/trfodraszat" target="_blank" class="btn btn-outline-light rounded-pill px-4">KAPCSOLATFELVÉTEL</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="reviews-section" class="py-5 bg-body-tertiary">
+        <div class="container py-4">
+            <div class="text-center mb-5">
+                <div class="small text-uppercase text-secondary">VÉLEMÉNYEK</div>
+                <h3 class="display-6 fw-light">AMIT VENDÉGEINK MONDANAK</h3>
+                <div class="section-divider-custom"></div>
+            </div>
+            <div class="row g-4">
+                <div class="col-md-4 reveal">
+                    <div class="testimonial-card p-4 rounded-3">
+                        <div class="stars-gold">
+                            <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
+                        </div>
+                        <p class="small fst-italic opacity-75">"Profi munka, remek hangulat. Mindig pontosan azt kapom, amit kérek. Debrecen legjobbja!"</p>
+                        <h6 class="fw-bold mb-0">- Kovács Péter</h6>
+                    </div>
+                </div>
+                <div class="col-md-4 reveal">
+                    <div class="testimonial-card p-4 rounded-3">
+                        <div class="stars-gold">
+                            <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
+                        </div>
+                        <p class="small fst-italic opacity-75">"A kávé isteni, a hajvágás pedig milliméter pontos. Robi nagyon figyel a részletekre."</p>
+                        <h6 class="fw-bold mb-0">- Nagy Tamás</h6>
+                    </div>
+                </div>
+                <div class="col-md-4 reveal">
+                    <div class="testimonial-card p-4 rounded-3">
+                        <div class="stars-gold">
+                            <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
+                        </div>
+                        <p class="small fst-italic opacity-75">"Szuper gyereksarkot is találtunk, a kisfiam is imád ide járni. Csak ajánlani tudom!"</p>
+                        <h6 class="fw-bold mb-0">- Szabó Márk</h6>
+                    </div>
+                </div>
+            </div>
+            <div class="text-center mt-5">
+                <a href="https://www.google.com/maps/place/TR+Fodr%C3%A1szat/@47.5244294,21.6005442,19.5z/data=!4m17!1m8!3m7!1s0x47470e197bb823a1:0x61757daa3ae1aa29!2sDebrecen,+Der%C3%A9k+u.+36,+4031!3b1!8m2!3d47.5243523!4d21.6004822!16s%2Fg%2F11pzt59gv0!3m7!1s0x47470f86846197f9:0xd081c12dc4909036!8m2!3d47.5243613!4d21.6003538!9m1!1b1!16s%2Fg%2F11lp87hgb0?entry=ttu&g_ep=EgoyMDI2MDQxMi4wIKXMDSoASAFQAw%3D%3D" target="_blank" class="btn btn-outline-special px-4 rounded-pill">
+                    <i class="bi bi-google me-2"></i>ÖSSZES VÉLEMÉNY MEGTEKINTÉSE
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <section id="gallery-section" class="py-5">
+        <div class="container py-3">
+            <div class="text-center mb-5">
+                <div class="small text-uppercase text-secondary">PORTFOLIO</div>
+                <h3 class="display-6 fw-light">GALÉRIA</h3>
+                <p class="text-secondary">Tekintsd meg referencia munkáimat.</p>
+                <div class="section-divider-custom"></div>
+            </div>
+
+            <div class="row g-4" id="galleryGrid">
+                <div class="col-md-5 col-lg-8 reveal">
+                    <div class="gallery-img-wrapper">
+                        <img src="kepek/kep1.png" alt="Studio" class="w-100">
+                        <div class="img-overlay-badge">THE STUDIO</div>
+                    </div>
+                </div>
+                <div class="col-md-7 col-lg-4 reveal">
+                    <div class="gallery-img-wrapper">
+                        <img src="kepek/kep2.png" alt="Portré 1">
+                        <div class="img-overlay-badge">THE LOOK</div>
+                    </div>
+                </div>
+                <div class="col-md-5 col-lg-4 reveal">
+                    <div class="gallery-img-wrapper">
+                        <img src="kepek/kep3.png" alt="Portré 2">
+                        <div class="img-overlay-badge">PRECISION</div>
+                    </div>
+                </div>
+                <div class="col-md-7 col-lg-4 reveal">
+                    <div class="gallery-img-wrapper">
+                        <img src="kepek/kep4.png" alt="Portré 3">
+                        <div class="img-overlay-badge">GIRL</div>
+                    </div>
+                </div>
+                <div class="col-md-7 col-lg-4 reveal">
+                    <div class="gallery-img-wrapper">
+                        <img src="kepek/kep5.png" alt="Portré 4">
+                        <div class="img-overlay-badge">GIRL</div>
+                    </div>
+                </div>
+                <div class="col-md-5 col-lg-4 reveal" id="loadMoreTile">
+                    <div class="load-more-tile w-100 h-100 d-flex flex-column justify-content-center align-items-center p-4" onclick="loadExtraImages()">
+                        <i class="bi bi-plus-lg fs-1"></i>
+                        <span class="small fw-bold mt-2">TOVÁBBI KÉPEK</span>
+                    </div>
+                </div>
+            </div>
+            <div id="extraImagesContainer" style="display: none;">
+                <div class="row g-4 mt-2">
+                    <div class="col-md-6 col-lg-4">
+                        <div class="gallery-img-wrapper"><img src="kepek/tovabbi_kep1.png" alt="Boy"><div class="img-overlay-badge">BOY</div></div>
+                    </div>
+                    <div class="col-md-6 col-lg-4">
+                        <div class="gallery-img-wrapper"><img src="kepek/tovabbi_kep2.png" alt="Modern Style"><div class="img-overlay-badge">MODERN STYLE</div></div>
+                    </div>
+                    <div class="col-md-6 col-lg-4">
+                        <div class="gallery-img-wrapper"><img src="kepek/tovabbi_kep3.png" alt="Luxury Cut"><div class="img-overlay-badge">LUXURY CUT</div></div>
+                    </div>
+                    <div class="col-md-6 col-lg-4">
+                        <div class="gallery-img-wrapper"><img src="kepek/tovabbi_kep4.png" alt="Luxury Cut"><div class="img-overlay-badge">LUXURY CUT</div></div>
+                    </div>
+                    <div class="col-md-6 col-lg-4">
+                        <div class="gallery-img-wrapper"><img src="kepek/tovabbi_kep5.png" alt="Luxury Cut"><div class="img-overlay-badge">LUXURY CUT</div></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="location-section" class="py-5">
+        <div class="container">
+            <div class="text-center mb-4">
+                <div class="small text-uppercase text-secondary">LOCATED IN DEBRECEN</div>
+                <h3 class="display-6 fw-light">ÜZLETEM HELYSZÍNE</h3>
+                <p class="text-secondary">4031 Debrecen, Derék u. 36.</p>
+                <div class="section-divider-custom"></div>
+            </div>
+            <div class="map-wrapper">
+                <iframe class="map-iframe" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2694.026130129219!2d21.58782407689975!3d47.528383893352724!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47470786846197f9%3A0x8081c12dc3909036!2sDebrecen%2C%20Der%C3%A9k%20u.%2036%2C%204031!5e0!3m2!1shu!2shu!4v1700000000000!5m2!1shu!2shu" allowfullscreen="" loading="lazy"></iframe>
+            </div>
+        </div>
+    </section>
+
+    <section id="faq-section" class="py-5 bg-body-tertiary">
+        <div class="container">
+            <div class="text-center mb-5">
+                <div class="small text-uppercase text-secondary">INFO</div>
+                <h3 class="display-6 fw-light">GYAKORI KÉRDÉSEK</h3>
+                <div class="section-divider-custom"></div>
+            </div>
+            <div class="row justify-content-center">
+                <div class="col-lg-8 reveal">
+                    <div class="accordion accordion-flush" id="accordionFAQ">
+                        <div class="accordion-item mb-3">
+                            <h2 class="accordion-header">
+                                <button class="accordion-button collapsed fw-bold" type="button" data-bs-toggle="collapse" data-bs-target="#faq1">
+                                    Mivel tudok fizetni az üzletben?
+                                </button>
+                            </h2>
+                            <div id="faq1" class="accordion-collapse collapse" data-bs-parent="#accordionFAQ">
+                                <div class="accordion-body opacity-75">
+                                    Üzletünkben jelenleg készpénzzel és azonnali banki átutalással tudsz fizetni.
+                                </div>
+                            </div>
+                        </div>
+                        <div class="accordion-item mb-3">
+                            <h2 class="accordion-header">
+                                <button class="accordion-button collapsed fw-bold" type="button" data-bs-toggle="collapse" data-bs-target="#faq2">
+                                    Hogyan érkezzek a hajvágásra?
+                                </button>
+                            </h2>
+                            <div id="faq2" class="accordion-collapse collapse" data-bs-parent="#accordionFAQ">
+                                <div class="accordion-body opacity-75">
+                                    Érdemes tiszta hajjal érkezni, de minden csomagunk tartalmazza a hajmosást is a tökéletes eredmény érdekében.
+                                </div>
+                            </div>
+                        </div>
+                        <div class="accordion-item mb-3">
+                            <h2 class="accordion-header">
+                                <button class="accordion-button collapsed fw-bold" type="button" data-bs-toggle="collapse" data-bs-target="#faq3">
+                                    Van parkolási lehetőség?
+                                </button>
+                            </h2>
+                            <div id="faq3" class="accordion-collapse collapse" data-bs-parent="#accordionFAQ">
+                                <div class="accordion-body opacity-75">
+                                    Igen, a Derék utcán számos ingyenes parkolóhely áll rendelkezésre közvetlenül az üzlet előtt.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="container text-center py-5">
+        <a href="https://www.facebook.com/trfodraszat" target="_blank" class="fb-link-custom d-inline-flex px-4 py-2 rounded-pill mx-auto" style="width: auto;">
+            <i class="bi bi-facebook"></i> FACEBOOK / TRFODRASZAT
+        </a>
+    </div>
+
+    <div class="modal fade" id="bookingModalBS" tabindex="-1" aria-labelledby="bookingModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header border-0 pb-0">
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Bezárás"></button>
+                </div>
+                <div class="modal-header-img">
+                    <img src="kepek/logo_nagy.png" alt="TR logo" class="img-fluid">
+                </div>
+                <div class="modal-body text-center">
+                    <p class="small text-uppercase text-secondary">IDŐPONTFOGLALÁS</p>
+                    <h5 class="fw-bold mb-3">Válassz opciót</h5>
+                    <div class="d-flex flex-column gap-3">
+                        <a href="https://m.me/trfodraszat" target="_blank" class="fb-link-custom bg-dark text-white border-0 rounded-pill">
+                            <i class="bi bi-messenger"></i> ÜZENET MESSENGEREN
+                        </a>
+                        <a href="tel:+36301234567" class="fb-link-custom rounded-pill">
+                            <i class="bi bi-telephone-fill"></i> HÍVÁS: +36 30 123 4567
+                        </a>
+                        <p class="small text-secondary mt-2">Hamarosan válaszolok! ✂️</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="text-center py-5 mt-4 small opacity-50">
+        © 2026 TR FODRÁSZAT | DEBRECEN
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // 1. TÉMA VÁLTÁS
+        const themeBtn = document.getElementById('themeToggleBtn');
+        const rootHtml = document.documentElement;
+
+        function setTheme(theme) {
+            rootHtml.setAttribute('data-bs-theme', theme);
+            localStorage.setItem('tr_theme', theme);
+            if (theme === 'dark') {
+                themeBtn.innerHTML = '<i class="bi bi-moon-stars-fill me-1"></i> <span id="themeText">Sötét</span>';
+            } else {
+                themeBtn.innerHTML = '<i class="bi bi-brightness-high-fill me-1"></i> <span id="themeText">Világos</span>';
+            }
+        }
+        const savedTheme = localStorage.getItem('tr_theme') || 'light';
+        setTheme(savedTheme);
+
+        themeBtn.addEventListener('click', () => {
+            const current = rootHtml.getAttribute('data-bs-theme');
+            setTheme(current === 'light' ? 'dark' : 'light');
+        });
+
+        // 2. NAVBAR SCROLL
+        const navbar = document.getElementById('mainNavbar');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) navbar.classList.add('scrolled');
+            else navbar.classList.remove('scrolled');
+        });
+
+        // 3. REVEAL ANIMÁCIÓ
+        const revealElements = document.querySelectorAll('.reveal');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) entry.target.classList.add('active');
+            });
+        }, { threshold: 0.15 });
+        revealElements.forEach(el => observer.observe(el));
+
+        // 4. GALÉRIA BETÖLTÉS
+        function loadExtraImages() {
+            const extraContainer = document.getElementById('extraImagesContainer');
+            const galleryGrid = document.getElementById('galleryGrid');
+            const loadTile = document.getElementById('loadMoreTile');
+            if (!extraContainer || !galleryGrid || !loadTile) return;
+            const extraRow = extraContainer.querySelector('.row');
+            if (extraRow) {
+                Array.from(extraRow.children).forEach(col => {
+                    col.classList.add('reveal');
+                    galleryGrid.appendChild(col);
+                    observer.observe(col);
+                });
+            }
+            loadTile.remove();
+        }
+
+        // 5. MODAL
+        let bsModal;
+        function openBookingModal() {
+            if (!bsModal) bsModal = new bootstrap.Modal(document.getElementById('bookingModalBS'));
+            bsModal.show();
+        }
+
+        // 6. NAVBAR ÖSSZECSUKÁS + SMOOTH SCROLL (Belógással)
+        const navbarCollapse = document.getElementById('navbarMain');
+        const navbarToggler = document.querySelector('.navbar-toggler');
+
+        document.querySelectorAll('.nav-link, .btn-dark, .navbar-brand').forEach(link => {
+            link.addEventListener('click', function(e) {
+                const targetId = this.getAttribute('href');
+                if (targetId && targetId.startsWith('#')) {
+                    e.preventDefault();
+                    const targetElement = document.querySelector(targetId);
+                    if (targetElement) {
+                        targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    }
+                    if (window.innerWidth < 992 && navbarCollapse.classList.contains('show')) {
+                        navbarToggler.click();
+                    }
+                }
+            });
+        });
+
+        // 7. CAROUSEL DISABLE ON MOBILE
+        function disableCarouselOnMobile() {
+            const carouselEl = document.getElementById('heroCarousel');
+            if (window.innerWidth < 768) {
+                const instance = bootstrap.Carousel.getInstance(carouselEl);
+                if (instance) instance.dispose();
+            } else {
+                if (!bootstrap.Carousel.getInstance(carouselEl)) {
+                    new bootstrap.Carousel(carouselEl, { interval: 8000, ride: 'carousel' });
+                }
+            }
+        }
+        window.addEventListener('load', disableCarouselOnMobile);
+        window.addEventListener('resize', disableCarouselOnMobile);
+    </script>
+</body>
+</html>
