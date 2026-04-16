@@ -3,7 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
-    <title>TR Fodrászat Debrecen</title>
+    <title>TR Fodrászat Debrecen | Precíziós férfi és női fodrászat</title>
+    <meta name="description" content="TR Fodrászat Debrecen - Tóth Robi hajszobrász vár precíziós férfi és női hajvágásokkal a Derék utcában. Időpontfoglalás Messengerben vagy telefonon. Élmény és kávé!">
+    <meta name="keywords" content="fodrászat Debrecen, Debrecen fodrász, TR Fodrászat, férfi hajvágás Debrecen, női pixie vágás, szakállvágás, fodrász Debrecen">
+    <meta name="author" content="TR Fodrászat">
+    <link rel="canonical" href="https://trfodraszat.hu">
     <link rel="icon" type="image/png" href="kepek/logo.png">
     <link rel="apple-touch-icon" href="kepek/logo.png">
 
@@ -22,13 +26,11 @@
             transition: background 0.3s ease;
         }
 
-        /* Navigációs belógás (peek effect) beállítása */
         section {
-            scroll-margin-top: 80px; /* Navbar magassága */
-            padding-bottom: 10vh !important; /* Hogy az alatta lévő szekció belelógjon a képbe */
+            scroll-margin-top: 80px;
+            padding-bottom: 10vh !important;
         }
 
-        /* Fix header (Bootstrap navbar override) */
         .navbar {
             transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
             backdrop-filter: blur(0px);
@@ -54,12 +56,10 @@
             letter-spacing: 3px;
         }
 
-        /* Hero carousel - fullscreen feeling */
         .hero-carousel {
-            margin-top: 76px; /* navbar height compensation */
+            margin-top: 76px;
         }
 
-        /* Vertikális középre igazítás a carousel elemekhez */
         .carousel-flex-center {
             display: flex;
             flex-direction: column;
@@ -69,17 +69,14 @@
             width: 100%;
         }
 
-        /* --- MOBIL NÉZET: a carousel elemek egymás alatt jelennek meg (nem slide) --- */
         @media (max-width: 767px) {
             .hero-carousel {
                 margin-top: 65px;
             }
-
             .hero-carousel .carousel-inner {
                 display: flex;
                 flex-direction: column;
             }
-
             .hero-carousel .carousel-item {
                 position: relative;
                 display: block !important;
@@ -89,18 +86,15 @@
                 margin-bottom: 2rem;
                 border-radius: 0;
             }
-
             .carousel-flex-center {
                 min-height: auto;
                 padding: 3rem 0;
             }
-
             .hero-carousel .carousel-control-prev,
             .hero-carousel .carousel-control-next,
             .hero-carousel .carousel-indicators {
                 display: none !important;
             }
-
             .hero-carousel .carousel-item.active,
             .hero-carousel .carousel-item-next,
             .hero-carousel .carousel-item-prev {
@@ -109,13 +103,11 @@
                 position: relative !important;
                 left: 0 !important;
             }
-
             .hero-carousel .carousel-item {
                 transition: none !important;
             }
         }
 
-        /* Asztali nézetben marad a carousel slide funkció */
         @media (min-width: 768px) {
             .hero-carousel .carousel-item {
                 min-height: 85vh;
@@ -123,7 +115,6 @@
                 background-position: center;
                 position: relative;
             }
-
             .hero-carousel .carousel-item.active {
                 display: block;
             }
@@ -168,7 +159,6 @@
             text-align: center;
         }
 
-        /* Card styles */
         .about-card, .feature-card, .service-card, .testimonial-card {
             background-color: var(--bs-secondary-bg);
             border: 1px solid var(--bs-border-color);
@@ -192,13 +182,11 @@
             margin-bottom: 0.5rem;
         }
 
-        /* FAQ Customization */
         .accordion-button:not(.collapsed) {
             background-color: var(--bs-secondary-bg);
             color: var(--bs-body-color);
         }
 
-        /* Gallery grid */
         .gallery-img-wrapper {
             overflow: hidden;
             border-radius: 4px;
@@ -210,7 +198,6 @@
             width: 100%;
             height: 280px;
             object-fit: cover;
-            filter: grayscale(100%);
             transition: all 0.5s ease;
         }
 
@@ -257,7 +244,6 @@
             transform: scale(1.01);
         }
 
-        /* Map iframe */
         .map-iframe {
             width: 100%;
             height: 450px;
@@ -265,7 +251,6 @@
             border-radius: 8px;
         }
 
-        /* Fixált hívás gomb mobilon */
         .fixed-call-btn {
             position: fixed;
             bottom: 25px;
@@ -275,7 +260,7 @@
             background-color: var(--bs-body-color);
             color: var(--bs-body-bg);
             border-radius: 50%;
-            display: none; /* Alapból rejtve, csak mobilon látszik */
+            display: none;
             align-items: center;
             justify-content: center;
             font-size: 1.5rem;
@@ -380,6 +365,36 @@
                 background-position: center;
             }
         }
+
+        /* Cookie banner */
+        .cookie-banner {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: var(--bs-body-bg);
+            border-top: 1px solid var(--bs-border-color);
+            padding: 1rem;
+            z-index: 1100;
+            transform: translateY(100%);
+            transition: transform 0.4s ease;
+            box-shadow: 0 -5px 20px rgba(0,0,0,0.1);
+        }
+        .cookie-banner.show {
+            transform: translateY(0);
+        }
+        .legal-link {
+            color: var(--bs-body-color);
+            text-decoration: underline;
+            cursor: pointer;
+        }
+        .legal-modal .modal-dialog {
+            max-width: 800px;
+        }
+        .legal-modal .modal-body {
+            max-height: 70vh;
+            overflow-y: auto;
+        }
     </style>
 </head>
 <body>
@@ -400,6 +415,8 @@
                     <li class="nav-item"><a class="nav-link" href="#services-section">Szolgáltatások</a></li>
                     <li class="nav-item"><a class="nav-link" href="#gallery-section">Galéria</a></li>
                     <li class="nav-item"><a class="nav-link" href="#location-section">Helyszín</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#faq-section">GYIK</a></li>
+                    <!---<li class="nav-item"><a class="nav-link legal-link" data-legal="impresszum">Impresszum</a></li>--->
                     <li class="nav-item">
                         <button class="btn btn-sm btn-outline-secondary rounded-pill px-3" id="themeToggleBtn">
                             <i class="bi bi-brightness-high-fill me-1"></i> <span id="themeText">Világos</span>
@@ -628,7 +645,6 @@
                 <p class="text-secondary">Tekintsd meg referencia munkáimat.</p>
                 <div class="section-divider-custom"></div>
             </div>
-
             <div class="row g-4" id="galleryGrid">
                 <div class="col-md-5 col-lg-8 reveal">
                     <div class="gallery-img-wrapper">
@@ -749,6 +765,18 @@
                                 </div>
                             </div>
                         </div>
+                        <div class="accordion-item mb-3">
+                            <h2 class="accordion-header">
+                                <button class="accordion-button collapsed fw-bold" type="button" data-bs-toggle="collapse" data-bs-target="#faq4">
+                                    Lemondási feltételek
+                                </button>
+                            </h2>
+                            <div id="faq4" class="accordion-collapse collapse" data-bs-parent="#accordionFAQ">
+                                <div class="accordion-body opacity-75">
+                                    A lefoglalt időpontot legkésőbb 24 órával előtte tudod lemondani vagy módosítani telefonon vagy Messenger üzenetben. Ennek elmulasztása esetén a következő foglalásnál kérhetjük a szolgáltatás előre történő kifizetését. Köszönjük megértésed!
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -774,20 +802,103 @@
                         <a href="tel:+36501065988" class="fb-link-custom rounded-pill">
                             <i class="bi bi-telephone-fill"></i> HÍVÁS: +36 50 106 59 88
                         </a>
-                        <p class="small text-secondary mt-2">Hamarosan válaszolok! ✂️</p>
+                        <p class="small text-secondary mt-2">Telefonon bármikor elérsz! ✂️</p>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 
+    <div class="cookie-banner" id="cookieBanner">
+        <div class="container d-flex flex-wrap align-items-center justify-content-between gap-3">
+            <div class="small">
+                <i class="bi bi-info-circle me-2"></i> Weboldalunk sütiket használ a témabeállítások mentéséhez és a jobb felhasználói élményért. Az "Elfogadom" gombbal elfogadod a szabályzatunkat.
+                <a class="legal-link ms-2" data-legal="adatkezeles">Adatkezelési tájékoztató</a> | 
+                <a class="legal-link" data-legal="aszf">ÁSZF</a>
+            </div>
+            <button class="btn btn-sm btn-dark rounded-pill px-4" id="acceptCookiesBtn">Elfogadom</button>
+        </div>
+    </div>
+
     <footer class="text-center py-5 mt-4 small opacity-50">
-        © 2026 TR FODRÁSZAT | DEBRECEN
+        <div class="container">
+            <div class="d-flex flex-wrap justify-content-center gap-3 mb-3">
+                <a class="legal-link" data-legal="impresszum">Impresszum</a>
+                <span>•</span>
+                <a class="legal-link" data-legal="adatkezeles">Adatkezelési tájékoztató</a>
+                <span>•</span>
+                <a class="legal-link" data-legal="aszf">ÁSZF</a>
+            </div>
+            © 2026 TR FODRÁSZAT | DEBRECEN | 
+        </div>
     </footer>
+
+    <!-- Legal modals -->
+    <div class="modal fade legal-modal" id="impresszumModal" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Impresszum</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <p><strong>TR Fodrászat</strong><br>
+                    <strong>Szolgáltató neve:</strong> Tóth Róbert EV<br>
+                    <strong>Székhely:</strong> 4031 Debrecen, Derék utca 36.<br>
+                    <strong>Elérhetőség:</strong> +36 50 106 59 88<br>
+                    <strong>Email:</strong> trfodraszat@gmail.com (csak kapcsolatfelvételre)<br>
+                    <strong>Adószám:</strong> 12345678-1-29 (példa, cseréld a valósra)<br>
+                    <strong>Nyilvántartási szám:</strong> 12345678 (példa)<br>
+                    <strong>Tárhelyszolgáltató:</strong> GitHub Pages / saját szerver<br>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade legal-modal" id="adatkezelesModal" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Adatkezelési Tájékoztató (GDPR)</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <p>A TR Fodrászat (Tóth Róbert EV) adatkezelőként tiszteletben tartja a személyes adatok védelméhez való jogot.</p>
+                    <p><strong>Kezeit adatok köre:</strong> Időpontfoglaláskor (Messenger/telefon) megadott név, telefonszám, időpont. A weboldal technikai sütiket (localStorage) használ a téma beállításához, ez nem tartalmaz személyes adatot.</p>
+                    <p><strong>Cél:</strong> Időpontok egyeztetése, kapcsolattartás, szolgáltatás teljesítése.</p>
+                    <p><strong>Jogalap:</strong> Szerződés teljesítése, beleegyezés (kapcsolatfelvétel).</p>
+                    <p><strong>Adatmegőrzés:</strong> Az üzleti kapcsolat végéig, illetve számviteli bizonylatok esetén 8 évig.</p>
+                    <p><strong>Jogaid:</strong> Tájékoztatás, helyesbítés, törlés („elfeledtetés”), tiltakozás kérése a fenti elérhetőségeken.</p>
+                    <p><strong>Adatvédelem:</strong> Adatokat harmadik félnek nem adjuk ki, kivéve hatósági kötelezés esetén.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade legal-modal" id="aszfModal" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Általános Szerződési Feltételek (ÁSZF)</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <p><strong>1. Szolgáltatások:</strong> Férfi, gyermek, női pixie hajvágás, szakállvágás, páros csomag. Árak a weblapon találhatóak.</p>
+                    <p><strong>2. Időpontfoglalás:</strong> Telefonon vagy Messenger üzenetben lehetséges. A visszaigazolt időpont kötelező érvényű.</p>
+                    <p><strong>3. Lemondás:</strong> Minimum 24 órával az időpont előtt ingyenes. Későbbi lemondás vagy megjelenés elmulasztása esetén a következő alkalommal előrefizetés kérhető.</p>
+                    <p><strong>4. Fizetés:</strong> Kizárólag készpénzben, a szolgáltatás után azonnal.</p>
+                    <p><strong>5. Panaszkezelés:</strong> Az elégedetlenséget azonnal jelezheted, törekszünk a javításra. Írásbeli panaszt a fenti emailre várjuk.</p>
+                    <p><strong>6. Felelősség:</strong> A vendég saját felelősségére hagyja értéktárgyait. Szakszerűtlen munka esetén a javítás díjmentes.</p>
+                    <p><strong>7. Egyéb:</strong> A szalonban készült referencia fotókat a vendég beleegyezésével használjuk fel.</p>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
     <script>
-        // 1. TÉMA VÁLTÁS
+        // Téma váltás
         const themeBtn = document.getElementById('themeToggleBtn');
         const rootHtml = document.documentElement;
 
@@ -808,14 +919,14 @@
             setTheme(current === 'light' ? 'dark' : 'light');
         });
 
-        // 2. NAVBAR SCROLL
+        // Navbar scroll
         const navbar = document.getElementById('mainNavbar');
         window.addEventListener('scroll', () => {
             if (window.scrollY > 50) navbar.classList.add('scrolled');
             else navbar.classList.remove('scrolled');
         });
 
-        // 3. REVEAL ANIMÁCIÓ
+        // Reveal animáció
         const revealElements = document.querySelectorAll('.reveal');
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
@@ -824,7 +935,7 @@
         }, { threshold: 0.15 });
         revealElements.forEach(el => observer.observe(el));
 
-        // 4. GALÉRIA BETÖLTÉS
+        // Galéria betöltés
         function loadExtraImages() {
             const extraContainer = document.getElementById('extraImagesContainer');
             const galleryGrid = document.getElementById('galleryGrid');
@@ -841,17 +952,16 @@
             loadTile.remove();
         }
 
-        // 5. MODAL
+        // Modal foglalás
         let bsModal;
         function openBookingModal() {
             if (!bsModal) bsModal = new bootstrap.Modal(document.getElementById('bookingModalBS'));
             bsModal.show();
         }
 
-        // 6. NAVBAR ÖSSZECSUKÁS + SMOOTH SCROLL (Belógással)
+        // Navbar összecsukás + smooth scroll
         const navbarCollapse = document.getElementById('navbarMain');
         const navbarToggler = document.querySelector('.navbar-toggler');
-
         document.querySelectorAll('.nav-link, .btn-dark, .navbar-brand').forEach(link => {
             link.addEventListener('click', function(e) {
                 const targetId = this.getAttribute('href');
@@ -868,7 +978,7 @@
             });
         });
 
-        // 7. CAROUSEL DISABLE ON MOBILE
+        // Carousel mobile
         function disableCarouselOnMobile() {
             const carouselEl = document.getElementById('heroCarousel');
             if (window.innerWidth < 768) {
@@ -882,6 +992,39 @@
         }
         window.addEventListener('load', disableCarouselOnMobile);
         window.addEventListener('resize', disableCarouselOnMobile);
+
+        // Cookie banner + legal modal
+        const cookieBanner = document.getElementById('cookieBanner');
+        const acceptBtn = document.getElementById('acceptCookiesBtn');
+        
+        function showCookieBanner() {
+            if (!localStorage.getItem('cookiesAccepted')) {
+                cookieBanner.classList.add('show');
+            }
+        }
+        
+        function hideCookieBanner() {
+            cookieBanner.classList.remove('show');
+            localStorage.setItem('cookiesAccepted', 'true');
+        }
+        
+        if (acceptBtn) acceptBtn.addEventListener('click', hideCookieBanner);
+        
+        // Legal modalok
+        const impresszumModal = new bootstrap.Modal(document.getElementById('impresszumModal'));
+        const adatkezelesModal = new bootstrap.Modal(document.getElementById('adatkezelesModal'));
+        const aszfModal = new bootstrap.Modal(document.getElementById('aszfModal'));
+        
+        document.querySelectorAll('.legal-link').forEach(link => {
+            link.addEventListener('click', (e) => {
+                const type = link.getAttribute('data-legal');
+                if (type === 'impresszum') impresszumModal.show();
+                if (type === 'adatkezeles') adatkezelesModal.show();
+                if (type === 'aszf') aszfModal.show();
+            });
+        });
+        
+        showCookieBanner();
     </script>
 </body>
 </html>
