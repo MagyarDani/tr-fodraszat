@@ -145,6 +145,7 @@
 
         .hero-slide-only .carousel-caption-custom h1 {
             text-shadow: 0 5px 15px rgba(0,0,0,0.5);
+            transition: opacity 0.5s ease;
         }
 
         .hero-slide-only .carousel-caption-custom {
@@ -366,7 +367,6 @@
             }
         }
 
-        /* Cookie banner */
         .cookie-banner {
             position: fixed;
             bottom: 0;
@@ -415,7 +415,7 @@
                     <li class="nav-item"><a class="nav-link" href="#services-section">Szolgáltatások</a></li>
                     <li class="nav-item"><a class="nav-link" href="#gallery-section">Galéria</a></li>
                     <li class="nav-item"><a class="nav-link" href="#location-section">Helyszín</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#faq-section">GYIK</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#faq-section">FAQ</a></li>
                     <!---<li class="nav-item"><a class="nav-link legal-link" data-legal="impresszum">Impresszum</a></li>--->
                     <li class="nav-item">
                         <button class="btn btn-sm btn-outline-secondary rounded-pill px-3" id="themeToggleBtn">
@@ -436,14 +436,14 @@
         <div class="carousel-inner">
             <div class="carousel-item active hero-slide-only" style="background-image: url('kepek/fo_kep.png'); background-size: cover; background-position: center;">
                 <div class="carousel-caption-custom d-flex flex-column justify-content-center align-items-center h-100 container">
-                    <h1 class="display-1 fw-black text-uppercase text-center" style="letter-spacing: -3px;">PURE<br>PRECISION.</h1>
+                    <h1 id="heroHeadline" class="display-1 fw-black text-uppercase text-center" style="letter-spacing: -3px;">PURE<br>PRECISION.</h1>
                     <p class="small tracking-wide text-white-50 mt-3" style="letter-spacing: 5px;">Köszöntelek weboldalamon</p>
                     <div class="mt-4">
                         <button class="btn btn-outline-light rounded-pill px-4 py-2" onclick="openBookingModal()">
                             <i class="bi bi-chat-dots me-1"></i> FOGLALJ IDŐPONTOT MOST!
                         </button>
                         <div class="container text-center py-5">
-                            <a href="https://www.facebook.com/profile.php?id=61574330504921" target="_blank" class="fb-link-custom d-inline-flex px-4 py-2 rounded-pill mx-auto" style="width: auto;">
+                            <a href="https://m.me/trfodraszat" target="_blank" class="fb-link-custom d-inline-flex px-4 py-2 rounded-pill mx-auto" style="width: auto;">
                                 <i class="bi bi-facebook"></i> FACEBOOK / TRFODRASZAT
                             </a>
                         </div>
@@ -551,7 +551,7 @@
                     <div class="service-card p-4 rounded-3">
                         <div class="small text-uppercase text-secondary">JUNIOR STYLE</div>
                         <h4 class="fw-bold mt-2">GYERMEK HAJVÁGÁS</h4>
-                        <p class="small opacity-75 my-2">Barátságos környezet a legkisebbeknek is.</p>
+                        <p class="small opacity-75 my-2">Barátságos környezet a legkisebbeknek is, 5 éves kortól.</p>
                         <h3 class="fw-black mt-3">3.500 Ft</h3>
                     </div>
                 </div>
@@ -586,7 +586,7 @@
                             <h4 class="fw-bold mb-1">EGYEDI ELKÉPZELÉSED VAN?</h4>
                             <p class="mb-0 small">Fotózásra készülsz? Megvalósítjuk!</p>
                         </div>
-                        <a href="https://www.facebook.com/profile.php?id=61574330504921" target="_blank" class="btn btn-outline-light rounded-pill px-4">KAPCSOLATFELVÉTEL</a>
+                        <a href="https://m.me/trfodraszat" target="_blank" class="btn btn-outline-light rounded-pill px-4">KAPCSOLATFELVÉTEL</a>
                     </div>
                 </div>
             </div>
@@ -624,8 +624,8 @@
                         <div class="stars-gold">
                             <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
                         </div>
-                        <p class="small fst-italic opacity-75">"Amikor kijöttem a fodrásztól, jó volt belenézni a tükörbe, mert végre rendesen állt a hajam, és kicsit jobban is éreztem magam tőle."</p>
-                        <h6 class="fw-bold mb-0">- Kiss András</h6>
+                        <p class="small fst-italic opacity-75">"Szuper gyereksarkot is találtunk, a kisfiam is imád ide járni. Csak ajánlani tudom!"</p>
+                        <h6 class="fw-bold mb-0">- Szabó Márk</h6>
                     </div>
                 </div>
             </div>
@@ -649,13 +649,13 @@
                 <div class="col-md-5 col-lg-8 reveal">
                     <div class="gallery-img-wrapper">
                         <img src="kepek/kep1.png" alt="Studio" class="w-100">
-                        <div class="img-overlay-badge">THE LOOK</div>
+                        <div class="img-overlay-badge">THE STUDIO</div>
                     </div>
                 </div>
                 <div class="col-md-7 col-lg-4 reveal">
                     <div class="gallery-img-wrapper">
                         <img src="kepek/kep2.png" alt="Portré 1">
-                        <div class="img-overlay-badge">THE STYLE</div>
+                        <div class="img-overlay-badge">THE LOOK</div>
                     </div>
                 </div>
                 <div class="col-md-5 col-lg-4 reveal">
@@ -667,13 +667,13 @@
                 <div class="col-md-7 col-lg-4 reveal">
                     <div class="gallery-img-wrapper">
                         <img src="kepek/kep4.png" alt="Portré 3">
-                        <div class="img-overlay-badge">KID</div>
+                        <div class="img-overlay-badge">GIRL</div>
                     </div>
                 </div>
                 <div class="col-md-7 col-lg-4 reveal">
                     <div class="gallery-img-wrapper">
                         <img src="kepek/kep5.png" alt="Portré 4">
-                        <div class="img-overlay-badge">MODERN</div>
+                        <div class="img-overlay-badge">GIRL</div>
                     </div>
                 </div>
                 <div class="col-md-5 col-lg-4 reveal" id="loadMoreTile">
@@ -686,19 +686,19 @@
             <div id="extraImagesContainer" style="display: none;">
                 <div class="row g-4 mt-2">
                     <div class="col-md-6 col-lg-4">
-                        <div class="gallery-img-wrapper"><img src="kepek/tovabbi_kep1.png" alt="Boy"><div class="img-overlay-badge">STYLE</div></div>
+                        <div class="gallery-img-wrapper"><img src="kepek/tovabbi_kep1.png" alt="Boy"><div class="img-overlay-badge">BOY</div></div>
                     </div>
                     <div class="col-md-6 col-lg-4">
-                        <div class="gallery-img-wrapper"><img src="kepek/tovabbi_kep2.png" alt="Modern Style"><div class="img-overlay-badge">SIMPLE</div></div>
+                        <div class="gallery-img-wrapper"><img src="kepek/tovabbi_kep2.png" alt="Modern Style"><div class="img-overlay-badge">MODERN STYLE</div></div>
                     </div>
                     <div class="col-md-6 col-lg-4">
-                        <div class="gallery-img-wrapper"><img src="kepek/tovabbi_kep3.png" alt="Luxury Cut"><div class="img-overlay-badge">JACKIE</div></div>
+                        <div class="gallery-img-wrapper"><img src="kepek/tovabbi_kep3.png" alt="Luxury Cut"><div class="img-overlay-badge">LUXURY CUT</div></div>
                     </div>
                     <div class="col-md-6 col-lg-4">
                         <div class="gallery-img-wrapper"><img src="kepek/tovabbi_kep4.png" alt="Luxury Cut"><div class="img-overlay-badge">LUXURY CUT</div></div>
                     </div>
                     <div class="col-md-6 col-lg-4">
-                        <div class="gallery-img-wrapper"><img src="kepek/tovabbi_kep5.png" alt="Luxury Cut"><div class="img-overlay-badge">COFFIE</div></div>
+                        <div class="gallery-img-wrapper"><img src="kepek/tovabbi_kep5.png" alt="Luxury Cut"><div class="img-overlay-badge">LUXURY CUT</div></div>
                     </div>
                 </div>
             </div>
@@ -796,7 +796,7 @@
                     <p class="small text-uppercase text-secondary">IDŐPONTFOGLALÁS</p>
                     <h5 class="fw-bold mb-3">Válassz opciót</h5>
                     <div class="d-flex flex-column gap-3">
-                        <a href="https://www.facebook.com/messages/t/1061152163748818" target="_blank" class="fb-link-custom bg-dark text-white border-0 rounded-pill">
+                        <a href="https://m.me/trfodraszat" target="_blank" class="fb-link-custom bg-dark text-white border-0 rounded-pill">
                             <i class="bi bi-messenger"></i> ÜZENET MESSENGEREN
                         </a>
                         <a href="tel:+36501065988" class="fb-link-custom rounded-pill">
@@ -829,11 +829,10 @@
                 <span>•</span>
                 <a class="legal-link" data-legal="aszf">ÁSZF</a>
             </div>
-            © 2026 TR FODRÁSZAT | DEBRECEN | 
+            © 2026 TR FODRÁSZAT | DEBRECEN | Telefonon bármikor fogadunk hívást időpontfoglalásra
         </div>
     </footer>
 
-    <!-- Legal modals -->
     <div class="modal fade legal-modal" id="impresszumModal" tabindex="-1">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
@@ -846,9 +845,9 @@
                     <strong>Szolgáltató neve:</strong> Tóth Róbert EV<br>
                     <strong>Székhely:</strong> 4031 Debrecen, Derék utca 36.<br>
                     <strong>Elérhetőség:</strong> +36 50 106 59 88<br>
-                    <strong>Email:</strong> trfodraszat@gmail.com (csak kapcsolatfelvételre)<br>
-                    <strong>Adószám:</strong> 12345678-1-29 (példa, cseréld a valósra)<br>
-                    <strong>Nyilvántartási szám:</strong> 12345678 (példa)<br>
+                    <strong>Email:</strong> trfodraszat@gmail.com<br>
+                    <strong>Adószám:</strong> 12345678-1-29<br>
+                    <strong>Nyilvántartási szám:</strong> 12345678<br>
                     <strong>Tárhelyszolgáltató:</strong> GitHub Pages / saját szerver<br>
                     </p>
                 </div>
@@ -1025,6 +1024,45 @@
         });
         
         showCookieBanner();
+
+        // === HERO SZÖVEG MEGJELENÍTÉS ÉS ELTŰNÉS MINDEN SLIDE VÁLTÁSKOR ===
+        let heroTimeout = null;
+
+        function showHeroText() {
+            const heroHeadline = document.getElementById('heroHeadline');
+            if (!heroHeadline) return;
+            
+            // Előző timeout törlése
+            if (heroTimeout) clearTimeout(heroTimeout);
+            
+            // Szöveg megjelenítése
+            heroHeadline.style.transition = 'opacity 0.5s ease';
+            heroHeadline.style.opacity = '1';
+            
+            // 5 másodperc múlva eltűnik
+            heroTimeout = setTimeout(function() {
+                if (heroHeadline) {
+                    heroHeadline.style.opacity = '0';
+                }
+            }, 5000);
+        }
+
+        // Carousel esemény figyelése - amikor új slide aktív lesz
+        const heroCarousel = document.getElementById('heroCarousel');
+        if (heroCarousel) {
+            heroCarousel.addEventListener('slid.bs.carousel', function(event) {
+                const activeSlide = event.relatedTarget;
+                // Ellenőrizzük, hogy az aktív slide a hero slide-e (első slide)
+                if (activeSlide && activeSlide.classList.contains('hero-slide-only')) {
+                    showHeroText();
+                }
+            });
+        }
+
+        // Oldal betöltésekor is fusson le, ha a hero slide aktív
+        if (document.querySelector('.carousel-item.active.hero-slide-only')) {
+            showHeroText();
+        }
     </script>
 </body>
 </html>
